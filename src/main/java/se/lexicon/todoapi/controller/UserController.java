@@ -49,17 +49,20 @@ public class UserController {
     }
 
 
-    @PutMapping("/disable/{username}")
-    public ResponseEntity<Void> disableUser(@PathVariable("username") String username){
+    @PutMapping("/disable")
+    public ResponseEntity<Void> disableUser(@RequestParam(name="username") String username){
         // todo: implement disable user by username api
+        System.out.println("disable::"+ username);
         userService.disableUserByUsername(username);
         return ResponseEntity.ok().build();
     }
 
 
-    @PutMapping("/enable/{username}")
-    public ResponseEntity<Void> enableUser(@PathVariable("username") String username){
+    @PutMapping("/enable")
+    public ResponseEntity<Void> enableUser(@RequestParam(name="username") String username){
         // todo: implement enable user by username api
+        System.out.println("enable::"+ username);
+
         userService.enableUserByUsername(username);
         return ResponseEntity.ok().build();
     }
