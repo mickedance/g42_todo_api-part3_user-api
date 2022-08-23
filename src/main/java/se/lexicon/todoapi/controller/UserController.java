@@ -50,21 +50,26 @@ public class UserController {
 
 
     @PutMapping("/disable")
-    public ResponseEntity<Void> disableUser(@RequestParam(name="username") String username){
+    public ResponseEntity<Void> disableUser(@RequestParam(name="username") final String username){
         // todo: implement disable user by username api
-        System.out.println("disable::"+ username);
-        userService.disableUserByUsername(username);
-        return ResponseEntity.ok().build();
+        try{
+            userService.disableUserByUsername(username);
+            return ResponseEntity.ok().build();
+        }catch (ObjectNotFoundException e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 
     @PutMapping("/enable")
-    public ResponseEntity<Void> enableUser(@RequestParam(name="username") String username){
+    public ResponseEntity<Void> enableUser(@RequestParam(name="username") final String username){
         // todo: implement enable user by username api
-        System.out.println("enable::"+ username);
-
-        userService.enableUserByUsername(username);
-        return ResponseEntity.ok().build();
+        try{
+            userService.enableUserByUsername(username);
+            return ResponseEntity.ok().build();
+        }catch (ObjectNotFoundException e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

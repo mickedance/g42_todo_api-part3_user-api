@@ -63,16 +63,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void disableUserByUsername(String username) {
+    public void disableUserByUsername(String username) throws ObjectNotFoundException {
         // todo: implement disable user by username
         if(username==null || username.equals("")) throw new IllegalArgumentException("username was null or empty");
+        if(!userRepository.findByUsername(username).isPresent()) throw new ObjectNotFoundException(username+ " not found");
         userRepository.updateExpiredByUsername(username,true);
     }
 
     @Override
-    public void enableUserByUsername(String username) {
+    public void enableUserByUsername(String username) throws ObjectNotFoundException{
         // todo: implement enable user by username
         if(username==null || username.equals("")) throw new IllegalArgumentException("username was null or empty");
+        if(!userRepository.findByUsername(username).isPresent()) throw new ObjectNotFoundException(username+ " not found");;
         userRepository.updateExpiredByUsername(username,false);
     }
 
